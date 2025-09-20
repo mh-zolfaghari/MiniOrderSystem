@@ -15,12 +15,12 @@ namespace MiniOrderSystem.Presentation.Controllers
         public async Task<IActionResult> Create([FromBody] CreateOrderCommand command, CancellationToken cancellationToken = default)
             => OK(await MediatR.Send(command, cancellationToken));
 
-        [HttpPost("/api/orders/item")]
+        [HttpPost("/api/orders/items")]
         [ProducesResponseType(typeof(Result), StatusCodes.Status200OK)]
         public async Task<IActionResult> UpsertItem([FromBody] UpsertOrderItemCommand command, CancellationToken cancellationToken = default)
             => OK(await MediatR.Send(command, cancellationToken));
 
-        [HttpDelete("/api/orders/item/{product_id:int}")]
+        [HttpDelete("/api/orders/items/{product_id:int}")]
         [ProducesResponseType(typeof(Result), StatusCodes.Status200OK)]
         public async Task<IActionResult> RemoveItem([FromRoute] int product_id, CancellationToken cancellationToken = default)
             => OK(await MediatR.Send(new RemoveOrderItemCommand { ProductId = product_id }, cancellationToken));
